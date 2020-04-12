@@ -1,0 +1,39 @@
+:source-highlighter: highlightjs
+:toc2:
+:toclevels: 2
+:Revision: version 1.0.0
+
+= Weather App Demo
+
+The weather demo application can be accesed at `http://localhost:8080/`
+
+The application has the following features :-
+
+* Display a summary table with three columns: `Station Name`, `Date` & `Mean Temperature`.
+* Sort the table based on the above three columns.
+* Free-form text search.
+* Filter data in the table based on a date-range.
+* Display more information about a `station` when clicked on the `Mean Temperature` cell.
+
+[TIP]
+The default search capability performs a `contains` search on all the columns in the table. For an exact search, enclose the search term within the `@` symbol. +
+Example --> `@NA@` will search for term `NA` in all the displayed columns and return data sets which are an exact match.
+
+[TIP]
+The table supports all combinations of free-form text search, sorting & date-range filtering.
+
+[TIP]
+Click the `Clear` button or collapse the `Filter Criteria` to reinitialize the table.
+
+
+
+[NOTE]
+====
+* The data in the table is sorted by `Station Name` in the `ascending` order.
+* Work is in progress to enable secondary sorting.
+====
+
+
+
+[CAUTION]
+In case of a validation error in the date-range filter, or in the case when either the `fromDate` or the `toDate` is missing, date-range will be ignored when sorting or searching.
