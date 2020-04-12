@@ -16,9 +16,7 @@ The following software should be installed locally:
 
 * Run the application
 
-> `mvn spring-boot:run`
-
-* [Point your browser to](http://localhost:8080/)
+> `mvn spring-boot:run` & [Point your browser to http://localhost:8080/](http://localhost:8080/)
 
 * Run unit tests
 
