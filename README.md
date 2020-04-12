@@ -14,9 +14,18 @@ The following software should be installed locally:
 
 ## Execution Instructions (Command Line)
 
+* Build & Package
+
+> `mvn clean package`
+
 * Run the application
 
-> `mvn spring-boot:run` & [Point your browser to http://localhost:8080/](http://localhost:8080/)
+> `mvn spring-boot:run`
+> `java -jar target\weather-demo-0.0.1-SNAPSHOT.jar`
+
+* Copy the port from the logs..
+
+> `2020-04-12 02:58:17.177  INFO 57960 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 65303 (http) with context path ''`
 
 * Run unit tests
 
@@ -26,7 +35,4 @@ The following software should be installed locally:
 
 > `mvn clean verify`
 
-* Build & Package
-
-> `mvn clean package`
 

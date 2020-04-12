@@ -1,9 +1,8 @@
-package com.example.demo.integration.tests;
+package com.weather.demo.integration.tests;
 
-import com.example.demo.WeatherApplication;
-import com.example.demo.data.entities.ColumnNames;
-import com.example.demo.representations.*;
-import com.example.demo.representations.ClimateDetailRepresentation;
+import com.weather.demo.WeatherApplication;
+import com.weather.demo.data.entities.ColumnNames;
+import com.weather.demo.representations.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

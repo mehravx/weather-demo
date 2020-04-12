@@ -1,12 +1,12 @@
-package com.example.demo.data.repositories;
+package com.weather.demo.data.repositories;
 
-import com.example.demo.config.ClimateFileConfig;
-import com.example.demo.data.entities.ClimateSummary;
-import com.example.demo.data.entities.ColumnNames;
-import com.example.demo.models.ColumnModel;
-import com.example.demo.models.Direction;
-import com.example.demo.models.OrderModel;
-import com.example.demo.models.PagingRequestModel;
+import com.weather.demo.config.ClimateFileConfig;
+import com.weather.demo.data.entities.ClimateSummary;
+import com.weather.demo.data.entities.ColumnNames;
+import com.weather.demo.models.ColumnModel;
+import com.weather.demo.models.Direction;
+import com.weather.demo.models.OrderModel;
+import com.weather.demo.models.PagingRequestModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

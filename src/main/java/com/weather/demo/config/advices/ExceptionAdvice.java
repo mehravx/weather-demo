@@ -1,7 +1,7 @@
-package com.example.demo.config.advices;
+package com.weather.demo.config.advices;
 
-import com.example.demo.exceptions.ApiError;
-import com.example.demo.exceptions.ValidationException;
+import com.weather.demo.exceptions.ApiError;
+import com.weather.demo.exceptions.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.example.demo.exceptions.ApiError.message;
+import static com.weather.demo.exceptions.ApiError.message;
 
 @ControllerAdvice
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
@@ -34,13 +34,13 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @Override
     protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.error("Message Not Readable for " + ((ServletWebRequest) request).getRequest().getRequestURI().toString(), ex);
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
     protected final ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.error("Invalid Method Argument for " + ((ServletWebRequest) request).getRequest().getRequestURI().toString(), ex);
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             MissingServletRequestParameterException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
         logger.error("Invalid Request Parameter for " + ((ServletWebRequest) request).getRequest().getRequestURI().toString(), ex);
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.BAD_REQUEST, ex), headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
@@ -59,14 +59,14 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             headers.setAllow(supportedMethods);
         }
 
-        return handleExceptionInternal(ex, message(HttpStatus.METHOD_NOT_ALLOWED, ex), headers, status, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.METHOD_NOT_ALLOWED, ex), headers, status, request);
     }
 
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
             MethodArgumentTypeMismatchException ex, WebRequest request) {
         logger.error("Argument Mismatch for " + ((ServletWebRequest) request).getRequest().getRequestURI().toString(), ex);
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.BAD_REQUEST, ex), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
 
     }
 
@@ -74,7 +74,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     protected final ResponseEntity<Object> handleBadRequest(final ValidationException ex, final WebRequest request) {
         logger.error("Validation Error for " + ((ServletWebRequest) request).getRequest().getRequestURI().toString(), ex);
         List<ApiError.ValidationErrors> validationErrors = ex.getValidationErrors().stream().map(error -> new ApiError.ValidationErrors(error.getErrorCode(), error.getErrorMessage())).collect(Collectors.toList());
-        return handleExceptionInternal(ex, message(HttpStatus.BAD_REQUEST, ex, validationErrors), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.BAD_REQUEST, ex, validationErrors), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
     // 500
@@ -82,7 +82,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler({RuntimeException.class})
     protected ResponseEntity<Object> handleInternal(final Exception ex, final WebRequest request) {
         logger.error("500 Status Code", ex);
-        return handleExceptionInternal(ex, message(HttpStatus.INTERNAL_SERVER_ERROR, ex), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+        return handleExceptionInternal(ex, ApiError.message(HttpStatus.INTERNAL_SERVER_ERROR, ex), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
 }

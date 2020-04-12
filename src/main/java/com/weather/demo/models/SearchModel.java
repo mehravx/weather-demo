@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.weather.demo.models;
 
 public class SearchModel {
 

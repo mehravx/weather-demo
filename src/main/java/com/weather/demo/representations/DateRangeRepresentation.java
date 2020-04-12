@@ -1,7 +1,7 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.exceptions.ValidationException;
-import com.example.demo.models.DateRangeModel;
+import com.weather.demo.exceptions.ValidationException;
+import com.weather.demo.models.DateRangeModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,6 +1,6 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.models.SearchModel;
+import com.weather.demo.models.SearchModel;
 
 import java.util.function.Function;
 

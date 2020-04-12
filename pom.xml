@@ -6,9 +6,10 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.6.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
-	<groupId>com.example</groupId>
+
+	<groupId>com.weather.demo</groupId>
 	<artifactId>weather-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>weather-demo</name>
@@ -20,6 +21,11 @@
 		<jackson-data-format.version>2.10.1</jackson-data-format.version>
 		<bootstrap.version>4.3.1</bootstrap.version>
 		<jquery.version>3.3.1</jquery.version>
+		<font.awesome.version>4.7.0</font.awesome.version>
+		<moment.js.version>2.24.0</moment.js.version>
+		<popper.js.version>1.16.0</popper.js.version>
+		<datatables.version>1.10.20</datatables.version>
+		<bootstrap.date-picker.version>1.6.4</bootstrap.date-picker.version>
 	</properties>
 
 	<dependencies>
@@ -45,6 +51,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-csv</artifactId>
+			<version>${jackson-data-format.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
@@ -54,10 +66,11 @@
 			<artifactId>bootstrap</artifactId>
 			<version>${bootstrap.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>font-awesome</artifactId>
-			<version>4.7.0</version>
+			<version>${font.awesome.version}</version>
 		</dependency>
 
 		<dependency>
@@ -69,7 +82,7 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>momentjs</artifactId>
-			<version>2.24.0</version>
+			<version>${moment.js.version}</version>
 		</dependency>
 
 		<dependency>
@@ -81,25 +94,19 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>popper.js</artifactId>
-			<version>1.16.0</version>
+			<version>${popper.js.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>datatables</artifactId>
-			<version>1.10.20</version>
+			<version>${datatables.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap-datepicker</artifactId>
-			<version>1.6.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-csv</artifactId>
-			<version>${jackson-data-format.version}</version>
+			<version>${bootstrap.date-picker.version}</version>
 		</dependency>
 
 		<dependency>
@@ -149,7 +156,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/com/example/demo/integration/tests</source>
+								<source>src/com/weather/demo/integration/tests</source>
 							</sources>
 						</configuration>
 					</execution>

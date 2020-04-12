@@ -1,6 +1,6 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.models.OrderModel;
+import com.weather.demo.models.OrderModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -54,8 +54,8 @@ public class OrderRepresentation {
             new OrderModel(
                     orderRepresentation.getColumn(),
                     orderRepresentation.getDir() == null ?
-                            com.example.demo.models.Direction.ASCENDING :
-                            com.example.demo.models.Direction.fromDescription(orderRepresentation.getDir().name()).orElse(com.example.demo.models.Direction.ASCENDING)
+                            com.weather.demo.models.Direction.ASCENDING :
+                            com.weather.demo.models.Direction.fromDescription(orderRepresentation.getDir().name()).orElse(com.weather.demo.models.Direction.ASCENDING)
             );
 
     public static Function<List<OrderRepresentation>, List<OrderModel>> toOrderModels = orderRepresentations ->

@@ -1,4 +1,4 @@
-package com.example.demo.data.entities;
+package com.weather.demo.data.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

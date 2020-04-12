@@ -1,7 +1,7 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.models.ClimateModel;
-import com.example.demo.representations.views.DataViews;
+import com.weather.demo.models.ClimateModel;
+import com.weather.demo.representations.views.DataViews;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 

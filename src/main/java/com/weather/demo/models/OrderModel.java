@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.weather.demo.models;
 
 import java.util.Objects;
 

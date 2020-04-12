@@ -86,7 +86,7 @@
 
     </br>
 
-    <div class="toast" id="myToastFilter" data-delay=10000 style="position: absolute; top: 600px; left: 300px;">
+    <div class="toast" id="myToastFilter" data-delay=10000 style="position: absolute; top: 0; left: 0;">
         <div class="toast-header">
             <strong class="mr-auto"><i class="fa fa-grav"></i> Weather Data App Demo!</strong>
             <small style="color:red;">Warning!</small>
@@ -100,7 +100,7 @@
         </div>
     </div>
 
-    <div class="toast" id="myToastCue" data-delay=20000 style="position: absolute; top: 500px; right: 0;">
+    <div class="toast" id="myToastCue" data-delay=20000 style="position: absolute; top: 0; right: 0;">
         <div class="toast-header">
             <strong class="mr-auto"><i class="fa fa-grav"></i> Weather Data App Demo!</strong>
             <small>Information</small>
@@ -137,111 +137,111 @@
 
 <script>
 
-jQuery.fn.extend({
-    drawDataTable: function () {
-    var dataTable = $(this).DataTable({
-        "dom": '<"top"lipf>rt<"bottom"pi><"clear">',
-        "lengthMenu": [
-                         [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
-                      ],
-        "processing": true,
-        "serverSide": true,
-        "paging": true,
-        "pagingType": "full_numbers",
-        "ajax": {
-            "url": "/summary",
-            "type": "POST",
-            "dataType": "json",
-            "contentType": "application/json",
-            "data": function (d) {
-                d.search.dateRange = {
-                    "fromDate": $('#fromDate').val(),
-                    "toDate": $('#toDate').val(),
-                    "columnName": "readingDate"
-                }
-                return JSON.stringify(d);
+    jQuery.fn.extend({
+        drawDataTable: function () {
+        var dataTable = $(this).DataTable({
+            "dom": '<"top"lipf>rt<"bottom"pi><"clear">',
+            "lengthMenu": [
+                             [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                          ],
+            "processing": true,
+            "serverSide": true,
+            "paging": true,
+            "pagingType": "full_numbers",
+            "ajax": {
+                "url": "/summary",
+                "type": "POST",
+                "dataType": "json",
+                "contentType": "application/json",
+                "data": function (d) {
+                    d.search.dateRange = {
+                        "fromDate": $('#fromDate').val(),
+                        "toDate": $('#toDate').val(),
+                        "columnName": "readingDate"
+                    }
+                    return JSON.stringify(d);
+                },
             },
-        },
-        "columns": [
-            {"data": "stationName"},
-            {"data": "readingDate"},
-            {
-                "class": "details",
-                "data": "meanMonthlyTemperature",
-                "render": function ( data, type, row, meta ) {
-                    return data;
+            "columns": [
+                {"data": "stationName"},
+                {"data": "readingDate"},
+                {
+                    "class": "details",
+                    "data": "meanMonthlyTemperature",
+                    "render": function ( data, type, row, meta ) {
+                        return data;
+                    }
                 }
-            }
-        ]
+            ]
+        });
+        $("#myToastCue").toast('show');
+        return dataTable;
+        }
     });
-    $("#myToastCue").toast('show');
-	return dataTable;
-    }
-});
 
-var dt1 = $('#example').drawDataTable();
+    var dt1 = $('#example').drawDataTable();
 
-$('#example tbody').on( 'click', 'tr td.details', function () {
-        var tr = $(this).closest('tr');
-        var row = dt1.row( tr );
-        window.location.replace('/detail?stationName=' + encodeURIComponent(row.data().stationName));
-});
+    $('#example tbody').on( 'click', 'tr td.details', function () {
+            var tr = $(this).closest('tr');
+            var row = dt1.row( tr );
+            window.location.replace('/detail?stationName=' + encodeURIComponent(row.data().stationName));
+    });
 
-$('#example').on( 'order.dt', function (e, settings, ordArr) {
-        var fromDateValue = $("#fromDate").val();
-        var toDateValue = $("#toDate").val();
-        console.log($('#filterErrorClientSide').is(':visible'));
-        console.log($('filterErrorClientSide:visible'));
+    $('#example').on( 'order.dt', function (e, settings, ordArr) {
+            var fromDateValue = $("#fromDate").val();
+            var toDateValue = $("#toDate").val();
+            console.log($('#filterErrorClientSide').is(':visible'));
+            console.log($('filterErrorClientSide:visible'));
 
-        if ($('#filterErrorClientSide').is(':visible') || $('#filterErrorServerSide').is(':visible')) {
-            $("#myToastFilter").toast('show');
-        }
-});
+            if ($('#filterErrorClientSide').is(':visible') || $('#filterErrorServerSide').is(':visible')) {
+                $("#myToastFilter").toast('show');
+            }
+    });
 
-$.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) {
-    console.log("from datatables on error");
-    $("#filterErrorClientSide").hide();
-    $("#filterErrorServerSide").hide();
-    if (settings.jqXHR.status=='400') {
-        $("#filterErrorServerSide").html(settings.jqXHR.responseJSON.validationErrors[0].errorMessage);
-        $("#filterErrorServerSide").show();
-        dt1.clear().destroy();
-        $(".table-responsive").hide();
-    }
-};
+    $.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) {
+            console.log("from datatables on error");
+            $("#filterErrorClientSide").hide();
+            $("#filterErrorServerSide").hide();
+            if (settings.jqXHR.status=='400') {
+                $("#filterErrorServerSide").html(settings.jqXHR.responseJSON.validationErrors[0].errorMessage);
+                $("#filterErrorServerSide").show();
+                dt1.clear().destroy();
+                $(".table-responsive").hide();
+            }
+    };
 
-$('#filterDates').click( function(d) {
-        $("#filterErrorClientSide").hide();
-        $("#filterErrorServerSide").hide();
-        var fromDateValue = $("#fromDate").val();
-        var toDateValue = $("#toDate").val();
-        if(!fromDateValue || !toDateValue) {
-            $("#filterErrorClientSide").show();
-            return;
-        }
+    $('#filterDates').click( function(d) {
+            $("#filterErrorClientSide").hide();
+            $("#filterErrorServerSide").hide();
+            var fromDateValue = $("#fromDate").val();
+            var toDateValue = $("#toDate").val();
+            if(!fromDateValue || !toDateValue) {
+                $("#filterErrorClientSide").show();
+                return;
+            }
 
-        var fromMoment = moment(fromDateValue, 'DD/MM/YYYY', true);
-        var toMoment = moment(toDateValue, 'DD/MM/YYYY', true);
-        if(!fromMoment.isValid() || !toMoment.isValid()){
-            $("#filterErrorClientSide").show();
-            return;
-        }
+            var fromMoment = moment(fromDateValue, 'DD/MM/YYYY', true);
+            var toMoment = moment(toDateValue, 'DD/MM/YYYY', true);
+            if(!fromMoment.isValid() || !toMoment.isValid()){
+                $("#filterErrorClientSide").show();
+                return;
+            }
 
-        if(toMoment.isBefore(fromMoment)) {
-             $("#filterErrorClientSide").html("Oops! Invalid date range! Client Side!");
-             $("#filterErrorClientSide").show();
-             return;
-        }
+            if(toMoment.isBefore(fromMoment)) {
+                 $("#filterErrorClientSide").html("Oops! Invalid date range! Client Side!");
+                 $("#filterErrorClientSide").show();
+                 return;
+            }
 
-        dt1.draw();
-    } );
+            dt1.draw();
+    });
 
-var dateRangePicker = $(".datepicker").datepicker({
-    format: "dd/mm/yyyy",
-    autoclose: true,
-    todayHighlight: true,
-    clearBtn: true
-});
+    var dateRangePicker = $(".datepicker").datepicker({
+            format: "dd/mm/yyyy",
+            autoclose: true,
+            todayHighlight: true,
+            clearBtn: true
+    });
 
 $('#resetDates, #filterCriteria').click( function(d) {
         var fromDateValue = $("#fromDate").val();
@@ -254,8 +254,7 @@ $('#resetDates, #filterCriteria').click( function(d) {
         $("#filterErrorClientSide").hide();
         $("#filterErrorServerSide").hide();
 
-    } );
-
+});
 
 </script>
 

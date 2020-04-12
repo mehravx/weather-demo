@@ -1,7 +1,7 @@
-package com.example.demo.data.entities;
+package com.weather.demo.data.entities;
 
-import com.example.demo.models.DateRangeModel;
-import com.example.demo.models.SearchModel;
+import com.weather.demo.models.DateRangeModel;
+import com.weather.demo.models.SearchModel;
 
 import java.time.LocalDate;
 import java.util.function.BiPredicate;

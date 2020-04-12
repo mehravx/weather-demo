@@ -1,4 +1,4 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
 public enum Direction {
     asc,

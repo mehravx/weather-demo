@@ -1,10 +1,10 @@
-package com.example.demo.services;
+package com.weather.demo.services;
 
-import com.example.demo.data.entities.ClimateSummary;
-import com.example.demo.data.repositories.ClimateRepository;
-import com.example.demo.models.ClimateModel;
-import com.example.demo.models.PageModel;
-import com.example.demo.models.PagingRequestModel;
+import com.weather.demo.data.entities.ClimateSummary;
+import com.weather.demo.data.repositories.ClimateRepository;
+import com.weather.demo.models.ClimateModel;
+import com.weather.demo.models.PageModel;
+import com.weather.demo.models.PagingRequestModel;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

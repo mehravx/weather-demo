@@ -1,4 +1,4 @@
-package com.example.demo.exceptions;
+package com.weather.demo.exceptions;
 
 import java.util.ArrayList;
 import java.util.Collections;
