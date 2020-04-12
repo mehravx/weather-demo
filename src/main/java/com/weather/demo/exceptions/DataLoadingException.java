@@ -1,4 +1,4 @@
-package com.example.demo.exceptions;
+package com.weather.demo.exceptions;
 
 public class DataLoadingException extends RuntimeException {
 

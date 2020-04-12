@@ -1,8 +1,8 @@
-package com.example.demo.controllers;
+package com.weather.demo.controllers;
 
-import com.example.demo.models.ClimateModel;
-import com.example.demo.representations.ClimateDetailRepresentation;
-import com.example.demo.services.ClimateService;
+import com.weather.demo.models.ClimateModel;
+import com.weather.demo.representations.ClimateDetailRepresentation;
+import com.weather.demo.services.ClimateService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.models.PagingRequestModel;
+import com.weather.demo.models.PagingRequestModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;

@@ -1,12 +1,12 @@
-package com.example.demo.controllers;
+package com.weather.demo.controllers;
 
-import com.example.demo.models.ClimateModel;
-import com.example.demo.models.PageModel;
-import com.example.demo.representations.ClimateDetailRepresentation;
-import com.example.demo.representations.PageRepresentation;
-import com.example.demo.representations.PagingRequestRepresentation;
-import com.example.demo.representations.views.DataViews;
-import com.example.demo.services.ClimateService;
+import com.weather.demo.models.ClimateModel;
+import com.weather.demo.models.PageModel;
+import com.weather.demo.representations.ClimateDetailRepresentation;
+import com.weather.demo.representations.PageRepresentation;
+import com.weather.demo.representations.PagingRequestRepresentation;
+import com.weather.demo.representations.views.DataViews;
+import com.weather.demo.services.ClimateService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

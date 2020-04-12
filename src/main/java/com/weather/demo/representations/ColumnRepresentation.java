@@ -1,6 +1,6 @@
-package com.example.demo.representations;
+package com.weather.demo.representations;
 
-import com.example.demo.models.ColumnModel;
+import com.weather.demo.models.ColumnModel;
 
 import java.util.List;
 import java.util.function.Function;

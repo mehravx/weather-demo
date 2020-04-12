@@ -1,8 +1,8 @@
-package com.example.demo.services;
+package com.weather.demo.services;
 
-import com.example.demo.data.entities.ClimateSummary;
-import com.example.demo.data.repositories.ClimateRepository;
-import com.example.demo.models.ClimateModel;
+import com.weather.demo.data.entities.ClimateSummary;
+import com.weather.demo.data.repositories.ClimateRepository;
+import com.weather.demo.models.ClimateModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
-package com.example.demo.data.repositories;
+package com.weather.demo.data.repositories;
 
-import com.example.demo.models.PagingRequestModel;
+import com.weather.demo.models.PagingRequestModel;
 
 import java.util.List;
 

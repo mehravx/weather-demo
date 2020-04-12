@@ -1,4 +1,4 @@
-package com.example.demo.data.entities;
+package com.weather.demo.data.entities;
 
 import java.util.Comparator;
 import java.util.Map;

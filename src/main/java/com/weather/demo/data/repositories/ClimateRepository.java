@@ -1,4 +1,4 @@
-package com.example.demo.data.repositories;
+package com.weather.demo.data.repositories;
 
 import java.util.List;
 

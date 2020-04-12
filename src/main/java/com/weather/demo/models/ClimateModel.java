@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.weather.demo.models;
 
 import java.time.LocalDate;
 import java.util.Arrays;

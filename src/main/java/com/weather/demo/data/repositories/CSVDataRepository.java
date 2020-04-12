@@ -1,13 +1,13 @@
-package com.example.demo.data.repositories;
+package com.weather.demo.data.repositories;
 
-import com.example.demo.config.ClimateFileConfig;
-import com.example.demo.data.entities.ClimateSummary;
-import com.example.demo.data.entities.ClimateSummaryComparators;
-import com.example.demo.data.entities.FilterCriteria;
-import com.example.demo.exceptions.DataLoadingException;
-import com.example.demo.models.Direction;
-import com.example.demo.models.OrderModel;
-import com.example.demo.models.PagingRequestModel;
+import com.weather.demo.config.ClimateFileConfig;
+import com.weather.demo.data.entities.ClimateSummary;
+import com.weather.demo.data.entities.ClimateSummaryComparators;
+import com.weather.demo.data.entities.FilterCriteria;
+import com.weather.demo.exceptions.DataLoadingException;
+import com.weather.demo.models.Direction;
+import com.weather.demo.models.OrderModel;
+import com.weather.demo.models.PagingRequestModel;
 import com.fasterxml.jackson.databind.MappingIterator;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
@@ -19,8 +19,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -59,7 +59,7 @@ public class CSVDataRepository implements ClimateRepository<ClimateSummary> {
             mapper.registerModule(new JavaTimeModule());
             mapper.enable(CsvParser.Feature.TRIM_SPACES);
             mapper.enable(CsvParser.Feature.SKIP_EMPTY_LINES);
-            File file = new ClassPathResource(fileName).getFile();
+            InputStream file = new ClassPathResource(fileName, this.getClass().getClassLoader()).getInputStream();
             MappingIterator<T> it = mapper.readerFor(type).with(bootstrapSchema).readValues(file);
             // can use it.readAll if the data-set being read is small in size
             List<T> result = new ArrayList<>();

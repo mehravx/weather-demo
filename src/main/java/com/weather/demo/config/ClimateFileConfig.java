@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.weather.demo.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.ConstructorBinding;
@@ -35,7 +35,7 @@ public class ClimateFileConfig {
     }
 
     public String getFilePath() {
-        return location.isPresent() ? (location.get().endsWith(System.lineSeparator()) ? location.get() + name : location.get() + System.lineSeparator() + name) : name;
+        return location.isPresent() ? (location.get().endsWith(System.lineSeparator()) ? location.get() + name : location.get() + System.lineSeparator() + name) : "/" + name;
     }
 
 }
