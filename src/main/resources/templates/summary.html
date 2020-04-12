@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather App Demo</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/datatables/1.10.20/css/dataTables.bootstrap4.min.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css}"/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}"/>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div id="accordion">
+        <div class="card">
+
+            <div id="filerCriteriaAddon" class="card-header">
+                <h5 class="mb-0">
+                    <button id="filterCriteria" class="btn btn-primary btn-sm text-lg btn-block collapsed"
+                            data-toggle="collapse"
+                            data-target="#filters" aria-expanded="false" aria-controls="filters">
+                        Filter Criteria
+                    </button>
+                </h5>
+            </div>
+
+            <div id="filters" class="collapse" aria-labelledby="filerCriteriaAddon" data-parent="#accordion">
+                <fieldset class="border border-dark p-2 ml-5 mr-5 mt-2 mb-3">
+                    <legend class="w-auto">Date Range</legend>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <div>
+                                <div class="input-group-prepend">
+                                    <input id="fromDate" type="text" class="form-control datepicker"
+                                           placeholder="dd/MM/yyyy">
+                                </div>
+                            </div>
+
+                            <div class="input-group-append">
+                                <span class="input-group-text">-</span>
+                            </div>
+
+                            <div>
+                                <div class="input-group-prepend">
+                                    <input id="toDate" type="text" class="form-control datepicker"
+                                           placeholder="dd/MM/yyyy">
+                                </div>
+                            </div>
+
+                            <div class="input-group-prepend">
+                                <span class="mr-5"></span>
+                            </div>
+                            <div class="input-group-append">
+                                <div class="input-group-prepend">
+
+                                    <button id="filterDates" class="btn btn-primary btn-block" style="width:120px;"
+                                            aria-pressed="true">Filter
+                                    </button>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <button id="resetDates" class="btn btn-secondary btn-block ml-3" style="width:120%;"
+                                            aria-pressed="true">Clear
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <div class="form-row">
+                                    <div id="filterErrorClientSide"
+                                         style="height: 25px; margin-top: 0.25rem; margin-left: 5rem; font-size: 80%; color: #dc3545; display:none">
+                                        Oops! Your dates dont seem to be right !
+                                    </div>
+                                    <div id="filterErrorServerSide"
+                                         style="height: 25px; margin-top: 0.25rem; margin-right: 5rem; font-size: 80%; color: #dc3545; display:none">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+        </div>
+    </div>
+
+    </br>
+
+    <div class="toast" id="myToastFilter" data-delay=10000 style="position: absolute; top: 600px; left: 300px;">
+        <div class="toast-header">
+            <strong class="mr-auto"><i class="fa fa-grav"></i> Weather Data App Demo!</strong>
+            <small style="color:red;">Warning!</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            You are sorting the table without fixing the date-range errors! You are on your own!
+            I am obviously kidding, its a work in progress...
+        </div>
+    </div>
+
+    <div class="toast" id="myToastCue" data-delay=20000 style="position: absolute; top: 500px; right: 0;">
+        <div class="toast-header">
+            <strong class="mr-auto"><i class="fa fa-grav"></i> Weather Data App Demo!</strong>
+            <small>Information</small>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Click on <b>mean temperatures</b> to see more details!
+            </br></br> I wish I could have provided a visual cue for this without changing the look & feel, guess a
+            clickable forth column with visual cues would have worked.
+            </br> Work in progress... Open for suggestions.
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table id="example" class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th class="details">Station_Name</th>
+                <th class="details">Date</th>
+                <th class="details">Mean_Temp</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/datatables/1.10.20/js/jquery.dataTables.min.js}"></script>
+<script th:src="@{/webjars/datatables/1.10.20/js/dataTables.bootstrap4.min.js}"></script>
+<script th:src="@{/webjars/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js}"></script>
+<script th:src="@{/webjars/momentjs/2.24.0/min/moment.min.js}"></script>
+
+<script>
+
+jQuery.fn.extend({
+    drawDataTable: function () {
+    var dataTable = $(this).DataTable({
+        "dom": '<"top"lipf>rt<"bottom"pi><"clear">',
+        "lengthMenu": [
+                         [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]
+                      ],
+        "processing": true,
+        "serverSide": true,
+        "paging": true,
+        "pagingType": "full_numbers",
+        "ajax": {
+            "url": "/summary",
+            "type": "POST",
+            "dataType": "json",
+            "contentType": "application/json",
+            "data": function (d) {
+                d.search.dateRange = {
+                    "fromDate": $('#fromDate').val(),
+                    "toDate": $('#toDate').val(),
+                    "columnName": "readingDate"
+                }
+                return JSON.stringify(d);
+            },
+        },
+        "columns": [
+            {"data": "stationName"},
+            {"data": "readingDate"},
+            {
+                "class": "details",
+                "data": "meanMonthlyTemperature",
+                "render": function ( data, type, row, meta ) {
+                    return data;
+                }
+            }
+        ]
+    });
+    $("#myToastCue").toast('show');
+	return dataTable;
+    }
+});
+
+var dt1 = $('#example').drawDataTable();
+
+$('#example tbody').on( 'click', 'tr td.details', function () {
+        var tr = $(this).closest('tr');
+        var row = dt1.row( tr );
+        window.location.replace('/detail?stationName=' + encodeURIComponent(row.data().stationName));
+});
+
+$('#example').on( 'order.dt', function (e, settings, ordArr) {
+        var fromDateValue = $("#fromDate").val();
+        var toDateValue = $("#toDate").val();
+        console.log($('#filterErrorClientSide').is(':visible'));
+        console.log($('filterErrorClientSide:visible'));
+
+        if ($('#filterErrorClientSide').is(':visible') || $('#filterErrorServerSide').is(':visible')) {
+            $("#myToastFilter").toast('show');
+        }
+});
+
+$.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) {
+    console.log("from datatables on error");
+    $("#filterErrorClientSide").hide();
+    $("#filterErrorServerSide").hide();
+    if (settings.jqXHR.status=='400') {
+        $("#filterErrorServerSide").html(settings.jqXHR.responseJSON.validationErrors[0].errorMessage);
+        $("#filterErrorServerSide").show();
+        dt1.clear().destroy();
+        $(".table-responsive").hide();
+    }
+};
+
+$('#filterDates').click( function(d) {
+        $("#filterErrorClientSide").hide();
+        $("#filterErrorServerSide").hide();
+        var fromDateValue = $("#fromDate").val();
+        var toDateValue = $("#toDate").val();
+        if(!fromDateValue || !toDateValue) {
+            $("#filterErrorClientSide").show();
+            return;
+        }
+
+        var fromMoment = moment(fromDateValue, 'DD/MM/YYYY', true);
+        var toMoment = moment(toDateValue, 'DD/MM/YYYY', true);
+        if(!fromMoment.isValid() || !toMoment.isValid()){
+            $("#filterErrorClientSide").show();
+            return;
+        }
+
+        if(toMoment.isBefore(fromMoment)) {
+             $("#filterErrorClientSide").html("Oops! Invalid date range! Client Side!");
+             $("#filterErrorClientSide").show();
+             return;
+        }
+
+        dt1.draw();
+    } );
+
+var dateRangePicker = $(".datepicker").datepicker({
+    format: "dd/mm/yyyy",
+    autoclose: true,
+    todayHighlight: true,
+    clearBtn: true
+});
+
+$('#resetDates, #filterCriteria').click( function(d) {
+        var fromDateValue = $("#fromDate").val();
+        var toDateValue = $("#toDate").val();
+        dateRangePicker.datepicker('update', '');
+        if(fromDateValue || toDateValue || $('filterErrorClientSide:visible') || $('filterErrorServerSide:visible')) {
+            dt1 = $('#example').drawDataTable();
+            $(".table-responsive").show();
+        }
+        $("#filterErrorClientSide").hide();
+        $("#filterErrorServerSide").hide();
+
+    } );
+
+
+</script>
+
+</body>
+</html>

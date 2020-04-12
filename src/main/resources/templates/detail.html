@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather Data</title>
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="card mb-4" th:if="${climateDetails.empty}">
+        <div class="card-header">
+            <p class="card-text"> Bummer ! No Details. </p>
+        </div>
+        <div class="card-body">
+        </div>
+        <hr class="style3">
+    </div>
+    <div class="card card bg-light mb-4" th:each="climateDetail : ${climateDetails}">
+        <div class="card-header text-white bg-dark">
+            <p><span th:text="#{details.weather.station}"/> <span th:if="${climateDetailStat.size &gt; 1}"> - <span
+                    th:text="${climateDetailStat.index} + 1"></span> of <span
+                    th:text="${climateDetailStat.size}"></span></span></p>
+        </div>
+        <div class="card-body">
+
+            <p class="card-text form-row">
+                <label class="card-title font-weight-bold col-sm-2 col-form-label col-form-label-lg" for="station-name"><span
+                        th:text="#{details.station.name}"/></label>
+                <span class="text-primary text-capitalize col-sm-2 col-form-label col-form-label-lg" id="station-name"
+                      th:text="${climateDetail.stationName}"></span>
+                <label class="card-title font-weight-bold col-sm-2 col-form-label col-form-label-lg"
+                       for="province"><span th:text="#{details.province}"/></label>
+                <span class="text-primary col-sm-2 col-form-label col-form-label-lg" id="province"
+                      th:text="${climateDetail.province}"></span>
+                <label class="card-title font-weight-bold col-sm-2 col-form-label col-form-label-lg" for="reading-date"><span
+                        th:text="#{details.reading.date}"/></label>
+                <span class="text-primary col-sm-2 col-form-label col-form-label-lg" id="reading-date"
+                      th:text="${#temporals.format(climateDetail.readingDate, 'dd/MM/yyyy')}"></span>
+            </p>
+
+            <hr class="style3 bg-primary">
+
+            <p class="card-text form-row">
+                <label class="text-dark font-weight-bold col-sm-2 col-form-label col-form-label-lg"
+                       for="mean-temp"><span th:text="#{details.mean.temp}"/></label>
+                <span class="text-primary col-sm-2 col-form-label col-form-label-lg" id="mean-temp"
+                      th:text="${climateDetail.meanMonthlyTemperature}"></span>
+                <label class="text-dark font-weight-bold col-sm-2 col-form-label col-form-label-lg"
+                       for="max-monthly-temp"><span th:text="#{details.max.temp}"/></label>
+                <span class="text-primary col-sm-2 col-form-label col-form-label-lg" id="max-monthly-temp"
+                      th:text="${climateDetail.maxMonthlyTemperature}"></span>
+                <label class="text-dark font-weight-bold col-sm-2 col-form-label col-form-label-lg"
+                       for="min-monthly-temp"><span th:text="#{details.min.temp}"/></label>
+                <span class="text-primary col-sm-2 col-form-label col-form-label-lg" id="min-monthly-temp"
+                      th:text="${climateDetail.minMonthlyTemperature}"></span>
+            </p>
+
+            <hr class="style3 bg-primary">
+
+        </div>
+        <hr class="style3">
+    </div>
+    <div><a href="#" id="home" class="btn btn-primary btn-lg">Take Me Home</a></div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script>
+    $('#home').on( 'click', function () {
+        window.location.replace('/index');
+    });
+</script>
+</body>
+</html>

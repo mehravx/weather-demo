@@ -1,0 +1,8 @@
+Station_Name     ,Province,Date      ,Mean_Temp,Highest_Monthly_Maxi_Temp,Lowest_Monthly_Min_Temp
+NORTH COWICHAN   ,BC      ,06/01/2018,         ,                         ,
+NORTH COWICHAN   ,BC      ,06/01/2018,14.6     ,28.8                     ,3.9
+VISHAL           ,BC      ,06/01/2018,15.5     ,28.5                     ,7.5
+ESQUIMALT HARBOUR,BC      ,06/01/2018,13.8     ,24.1                     ,7.4
+GALIANO NORTH    ,BC      ,06/01/2018,14.9     ,26                       ,8
+METCHOSIN        ,BC      ,06/01/2018,         ,                         ,
+MALAHAT          ,BC      ,06/01/2018,14.4     ,28.5                     ,6.4

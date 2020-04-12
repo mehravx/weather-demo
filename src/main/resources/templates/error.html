@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Weather Data</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="error-template">
+                <h1>
+                    Oops!</h1>
+                <h2>
+                    We are on it !</h2>
+                <div class="error-details">
+                    Sorry, an error has occured!
+                </div>
+                <div class="error-actions">
+                    <a href="#" id="home" class="btn btn-primary btn-lg">Take Me Home</a>
+                    <a href="#" id="support" class="btn btn-secondary btn-lg">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+<script>
+$('#home').on( 'click', function () {
+        window.location.replace('/index');
+});
+
+$('#support').on( 'click', function () {
+        alert('Support is available for paid subscribers only ! Taking you back to home !');
+        window.location.replace('/index');
+});
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
