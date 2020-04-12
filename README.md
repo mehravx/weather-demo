@@ -21,7 +21,10 @@ The following software should be installed locally:
 * Run the application
 
 > `mvn spring-boot:run`
-> `java -jar target\weather-demo-0.0.1-SNAPSHOT.jar`
+
+OR
+
+> `java -jar target/weather-demo-0.0.1-SNAPSHOT.jar`
 
 * Copy the port from the logs..
 
