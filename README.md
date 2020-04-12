@@ -26,9 +26,11 @@ OR
 
 > `java -jar target/weather-demo-0.0.1-SNAPSHOT.jar`
 
-* Copy the port from the logs..
+* Copy the port from the logs.. and point your browser to `http://localhost:${PORT}/`
 
 > `2020-04-12 02:58:17.177  INFO 57960 --- [           main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 65303 (http) with context path ''`
+
+> Exmaple --> `http://localhost:65303/`
 
 * Run unit tests
 
