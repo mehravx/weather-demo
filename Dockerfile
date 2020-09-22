@@ -4,7 +4,8 @@ RUN mkdir /app/secrets
 ADD target/weather-demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
 ### change permission to grant arbitary user privilege to /app directory
-RUN chgrp -R 0 /app && chmod -R g=u /app
+RUN chgrp -R 0 /app
+RUN chmod -R g=u /app
 
 WORKDIR /app
 ENV JAVA_OPTS=""
