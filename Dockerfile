@@ -1,7 +1,7 @@
 FROM openjdk:8
 RUN mkdir /app
 RUN mkdir /app/secrets
-ADD target/weather-demo.jar /app/app.jar
+ADD target/weather-demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
 ### change permission to grant arbitary user privilege to /app directory
 RUN chgrp -R 0 /app && chmod -R g=u /app
