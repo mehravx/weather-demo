@@ -1,4 +1,4 @@
-FROM openjdk:13-alpine
+FROM openjdk:8
 RUN mkdir /app
 RUN mkdir /app/secrets
 ADD target/weather-demo.jar /app/app.jar
