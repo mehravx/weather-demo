@@ -27,8 +27,7 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: Deploy with Maven
-      run: mvn --settings settings.xml --file pom.xml deploy
+      run: mvn --file pom.xml deploy
       env:
-        GITHUB_USERNAME: mehravx
-        GITHUB_TOKEN: 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
+        GITHUB_TOKEN: ${{ github.token }}
     
