@@ -27,5 +27,5 @@ jobs:
     - name: Deploy with Maven
       run: mvn --batch-mode deploy
       env:
-        GITHUB_TOKEN: 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
+        GITHUB_TOKEN: "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"
     
