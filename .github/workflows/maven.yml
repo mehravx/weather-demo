@@ -29,5 +29,6 @@ jobs:
     - name: Deploy with Maven
       run: mvn --batch-mode deploy
       env:
+        GITHUB_USERNAME: "mehravx"
         GITHUB_TOKEN: "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"
     
