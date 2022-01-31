@@ -12,7 +12,7 @@ on:
     types: [created]
 
 env:
-  DOCKER_USERNAME: vishalm_001@yahoo.com
+  DOCKER_USERNAME: mehravx
   REPO: weather-demo
   GITHUB_TOKEN: ${{ github.token }}
 
