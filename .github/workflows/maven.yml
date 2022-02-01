@@ -41,12 +41,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Update POM Versions
-        run: mvn --batch-mode release:update-versions -Dversion=${{ steps.versioning.outputs.version }}
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Deploy with Maven
-        run: mvn deploy
+        run: mvn install
     
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -70,5 +68,10 @@ jobs:
           tag_name: ${{ steps.versioning.outputs.version }}
           release_name: ${{ steps.versioning.outputs.version }}
           prerelease: true
+      - name: Update POM Versions
+        run: mvn --batch-mode release:update-versions -Dversion=${{ steps.versioning.outputs.version }}
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: update pom versions
   
     
