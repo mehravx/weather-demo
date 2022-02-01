@@ -41,10 +41,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Update POM Versions
+        run: mvn --batch-mode release:update-versions -DdevelopmentVersion=${{ steps.versioning.outputs.version }}
       - name: Build with Maven
         run: mvn -B package --file pom.xml
       - name: Deploy with Maven
-        run: mvn install
+        run: mvn deploy
     
       - name: Login to DockerHub
         uses: docker/login-action@v1
