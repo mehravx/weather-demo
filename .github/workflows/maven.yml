@@ -69,7 +69,7 @@ jobs:
           release_name: ${{ steps.versioning.outputs.version }}
           prerelease: true
       - name: Update POM Versions
-        run: mvn --batch-mode release:update-versions -Dversion=${{ steps.versioning.outputs.version }}
+        run: mvn --batch-mode release:update-versions -DdevelopmentVersion=${{ steps.versioning.outputs.version }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: update pom versions
