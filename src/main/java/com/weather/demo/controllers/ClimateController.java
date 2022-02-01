@@ -41,12 +41,9 @@ public class ClimateController {
     @JsonView(DataViews.ClimateSummaryView.class)
     @PostMapping(value = "/summary", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PageRepresentation<ClimateDetailRepresentation>> getAllClimateData(@RequestBody PagingRequestRepresentation pagingRequestRepresentation) {
-        System.out.println("called");
-        System.out.println(pagingRequestRepresentation.getSearch().getDateRange());
         PageModel<ClimateModel> model = climateService.retrieveClimateData(PagingRequestRepresentation.toPagingModel.apply(pagingRequestRepresentation));
         System.out.println(model);
         PageRepresentation<ClimateDetailRepresentation> representationPageRepresentation = PageRepresentation.toPageRepresentation.apply(model);
-        System.out.println(representationPageRepresentation);
 
         return ResponseEntity.ok(representationPageRepresentation);
     }
