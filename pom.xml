@@ -10,7 +10,7 @@
 
 	<groupId>com.weather.demo</groupId>
 	<artifactId>weather-demo</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>weather-demo</name>
 	<description>Weather Demo</description>
 
