@@ -42,7 +42,6 @@ public class ClimateController {
     @PostMapping(value = "/summary", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PageRepresentation<ClimateDetailRepresentation>> getAllClimateData(@RequestBody PagingRequestRepresentation pagingRequestRepresentation) {
         PageModel<ClimateModel> model = climateService.retrieveClimateData(PagingRequestRepresentation.toPagingModel.apply(pagingRequestRepresentation));
-        System.out.println(model);
         PageRepresentation<ClimateDetailRepresentation> representationPageRepresentation = PageRepresentation.toPageRepresentation.apply(model);
 
         return ResponseEntity.ok(representationPageRepresentation);
