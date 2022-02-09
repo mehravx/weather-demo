@@ -43,7 +43,7 @@ public class ClimateController {
     public ResponseEntity<PageRepresentation<ClimateDetailRepresentation>> getAllClimateData(@RequestBody PagingRequestRepresentation pagingRequestRepresentation) {
         PageModel<ClimateModel> model = climateService.retrieveClimateData(PagingRequestRepresentation.toPagingModel.apply(pagingRequestRepresentation));
         PageRepresentation<ClimateDetailRepresentation> representationPageRepresentation = PageRepresentation.toPageRepresentation.apply(model);
-
+        System.out.println("");
         return ResponseEntity.ok(representationPageRepresentation);
     }
 
